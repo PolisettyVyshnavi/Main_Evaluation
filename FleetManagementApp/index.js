@@ -55,7 +55,7 @@ function applyFilters(){
     let filteredData=fleetData.filter(vehicle=>{
         const match=(selectedCategory==='All' || vehicle.category===selectedCategory)
         const matchavailable=(selectedAvailability==='All' || vehicle.isAvailable===selectedAvailability);
-        return.match&& matchavailable
+        return match&& matchavailable
     })
     renderFleetCards(filteredData)
 }
