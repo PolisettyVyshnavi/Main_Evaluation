@@ -27,4 +27,41 @@ function renderFleetCards(dataTorender){
 
     })
 }
-document
+document.getElementById("fleet-form").addEventListener('submit',function(event)){
+    event.preventDefault();
+    const regNo=document.getElementById('reg-no').value.trim();
+    const category=document.getElementById('category').value;
+    const driverName=document.getElementById('driver-name').value.trim();
+    const isAvailable=document.getElementById('availability').value;
+    if (!regNo || !category){
+        alert("Reg No Vehicle and Category are required fields")
+        return;
+    }
+    const newVehicle={
+        id:Date.now(),
+        regNo:regNo,
+        category:category,
+        driverName:driverName,
+        isAvailable:isAvailable
+    };
+    fleetData.push(newVehicle);
+    document.getElementById('fleet-form').reset();
+    document.getElementById('availability').value='Available';
+    applyFilters();
+}
+function applyFilters(){
+    const selectedCategory=document.getElementById('category-filter').value;
+    const selectedAvailability=document.getElementById('availability-filter').value;
+    let filteredData=fleetData.filter(vehicle=>{
+        const match=(selectedCategory==='All' || vehicle.category===selectedCategory)
+        const matchavailable=(selectedAvailability==='All' || vehicle.isAvailable===selectedAvailability);
+        return.match&& matchavailable
+    })
+    renderFleetCards(filteredData)
+}
+document.getElementById('catergory-filter').addEventListener('change',applyFilters);
+document.getElementById('availability-filter').addEventListener('change',applyFilters)
+document.getElementById('clear-filter-btn').addEventListener('click',function(){
+    document.getElementById('category-filter').value='All'
+
+})
