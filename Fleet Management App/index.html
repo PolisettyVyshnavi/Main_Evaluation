@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Login Page</title>
+    </head>
+    <body>
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email"><br><br>
+        <input type="password" id="password" placeholder="Password"><br><br>
+        <button onclick="validate()">Login</button>
+        <script>
+            function validate(){
+                const email=document.getElementById('email').value;
+                const password=document.getElementById('password').value;
+                const mail="admin@gmail.com";
+                const pswd="admin1234";
+                if(email==mail && password==pswd){
+                    alert("Login Success");
+                    window.location.href="admin.html";
+                }
+                else{
+                    alert("Wrong email or password")
+                }
+            }
+        </script>
+    </body>
+</html>
