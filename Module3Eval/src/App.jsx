@@ -1,6 +1,6 @@
 import { Routes,Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { UpdateRestaurant } from "./pages/UpdateRestauranr";
+import { UpdateRestaurant } from "./pages/UpdateRestaurant";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { CustomerDashboard } from "./pages/CustomerDashboard";
 import { Login } from "./pages/Login";
