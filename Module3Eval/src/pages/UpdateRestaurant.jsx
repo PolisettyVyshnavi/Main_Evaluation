@@ -1,5 +1,5 @@
 import { useState,useContext } from "react";
-import { useLocation,useContext as useReactContext } from "react-router-dom";
+import { useLocation,useContext as useReactContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 export const UpdateRestaurant=()=>{
     const {state}=useLocation();
