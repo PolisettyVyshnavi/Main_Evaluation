@@ -1,5 +1,5 @@
 import { from } from "../config/supabase.js";
-const getAnalytics =async(req,res)=>{
+export const getAnalytics =async(req,res)=>{
     try{
         const getCount=async(table,role=null)=>{
             let query=from(table).select('*',{count:'exact',head:true});
@@ -27,4 +27,3 @@ const getAnalytics =async(req,res)=>{
     res.status(500).json({error:"Dashbase error occured"})
         }
 }
-export default{getAnalytics}
