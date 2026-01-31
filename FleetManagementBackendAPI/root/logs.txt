@@ -6,3 +6,8 @@
 2026-01-31T15:28:30.663Z POST /api/users/signup
 2026-01-31T15:29:11.511Z POST /api/vehicles/add
 2026-01-31T15:29:28.050Z POST /api/vehicles/add
+2026-01-31T15:32:58.380Z PATCH /api/vehicles/assign-driver/86ec6a4e-8529-43b1-b767-07d8f0865fa6%0A
+2026-01-31T15:34:03.351Z PATCH /api/vehicles/assign-driver/86ec6a4e-8529-43b1-b767-07d8f0865fa6%0A
+2026-01-31T15:35:05.418Z PATCH /api/vehicles/assign-driver/86ec6a4e-8529-43b1-b767-07d8f0865fa6%0A
+2026-01-31T15:36:18.194Z POST /api/trips/create
+2026-01-31T15:37:39.540Z POST /api/users/signup
