@@ -1,29 +1,23 @@
-import { from } from "../config/supabase.js";
-export const getAnalytics =async(req,res)=>{
-    try{
-        const getCount=async(table,role=null)=>{
-            let query=from(table).select('*',{count:'exact',head:true});
-            if(role) query=query.eq('role',role);
-            const {count}=await query;
-            return count || 0;
-        };
-    const [customers,owners,drivers,vehicles,trips]=await Promise.all([
-        getCount('users','customer'),
-        getCount('users','owner'),
-        getCount('user','driver'),
-        getCount('vehicles'),
-        getCount('trips')
-    ])
-    res.status(200).json({
-        "Total customers":customers,
-        "Total owners":owners,
-        "Total drivers":drivers,
-        "Total vehicles":vehicles,
-        "Total trips":trips
+import supabase from '../config/supabase.js';
+
+export async function getAnalytics(req, res) {
+  try {
+    const [customers, owners, drivers, vehicles, trips] = await Promise.all([
+      supabase.from('users').select('*', { count: 'exact' }).eq('role','customer'),
+      supabase.from('users').select('*', { count: 'exact' }).eq('role','owner'),
+      supabase.from('users').select('*', { count: 'exact' }).eq('role','driver'),
+      supabase.from('vehicles').select('*', { count: 'exact' }),
+      supabase.from('trips').select('*', { count: 'exact' })
+    ]);
+
+    res.json({
+      total_customers: customers.count,
+      total_owners: owners.count,
+      total_drivers: drivers.count,
+      total_vehicles: vehicles.count,
+      total_trips: trips.count
     });
-
-
-    }catch(error){
-    res.status(500).json({error:"Dashbase error occured"})
-        }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 }

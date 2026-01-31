@@ -1,5 +1,8 @@
-import { Router } from 'express';
-const router=Router();
-import { getAnalytics } from "../controllers/analyticsController.js";
+import express from 'express';
+import { getAnalytics } from '../controllers/analyticsController.js';
 
-router.get('/',getAnalytics);
+const router = express.Router();
+
+router.get('/', getAnalytics);
+
+export default router;

@@ -1,12 +1,11 @@
-const  express=require('express');;
-const router=express.Router();
-const {rateLimiter}=require('../middlewares/appMiddleware.js')
+import express from 'express';
+import { addVehicle, assignDriver, getVehicle } from '../controllers/vehicleController.js';
+import rateLimiter from '../middlewares/rateLimiter.js';
 
-router.post('/',rateLimiter,(req,res)=>{
-    res.status(201).json({
-        message:"Vehicle created successfully",
-        note:"This route is rate limited to 3 requests per unit"
-    })
-})
+const router = express.Router();
 
-module.exports=router
+router.post('/add', rateLimiter, addVehicle);
+router.patch('/assign-driver/:vehicleId', assignDriver);
+router.get('/:vehicleId', getVehicle);
+
+export default router;

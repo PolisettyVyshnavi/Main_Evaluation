@@ -1,14 +1,26 @@
-import express, { json } from 'express';
-import { logger, rateLimiter, handle404 } from './middlewares/appMiddleware.js';
+import express from 'express';
+import dotenv from 'dotenv';
+import userRoutes from './routes/userRoutes.js';
+import vehicleRoutes from './routes/vehicleRoutes.js';
+import tripRoutes from './routes/tripRoutes.js';
 import analyticsRoutes from './routes/analyticsRoutes.js';
+import logger from './middlewares/logger.js';
+import notFound from './middlewares/notFound.js';
 
-const app=express();
-app.use(json())
+dotenv.config();
+
+const app = express();
+app.use(express.json());
 app.use(logger);
-app.use('/analytics',analyticsRoutes)
-app.post('/create-vehicle',rateLimiter,(req,res)=>{
-    res.status(201).json({message:"Vehicle added"})
-})
-app.use(handle404)
-const PORT=process.env.PORT || 3000;
-app.listen(PORT,()=>console.log(`server running on port ${PORT}`))
+
+// Routes
+app.use('/api/users', userRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/trips', tripRoutes);
+app.use('/api/analytics', analyticsRoutes);
+
+// Handle undefined routes
+app.use(notFound);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Fleet Management API running on port ${PORT}`));
